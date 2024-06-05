@@ -75,8 +75,7 @@ install(
 configure_package_config_file(
   ${PROJECT_NAME}Config.cmake.in
   ${PROJECT_NAME}Config.cmake
-  INSTALL_DESTINATION "${ConfigPackageLocation}"
-  PATH_VARS CMAKE_INSTALL_PREFIX
+  INSTALL_DESTINATION ${ConfigPackageLocation}
 )
 
 write_basic_package_version_file(
@@ -94,6 +93,8 @@ install(
   COMPONENT
     Development
 )
+
+install(DIRECTORY ${UTILS_DIR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
 ######################
 # Settings for tests # 
