@@ -8,11 +8,10 @@ The libutils library defines functions that operate on ranges of elements. Range
 Installation:
 #############
 
-
-
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    ext_algorithm
+   ext_iterator
+   other_algorithm
