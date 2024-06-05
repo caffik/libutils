@@ -6,6 +6,11 @@ project(
     LANGUAGES CXX 
 )
 
+set(NAMESPACE_NAME "libutils")
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
 ##########################
 # Naming paths and files # 
 ##########################
@@ -20,58 +25,73 @@ set(INCLUDE_UTILS
 ###############
 # Set library # 
 ###############
-add_library(libutils INTERFACE)
-add_library(libutils::utils ALIAS libutils)
+add_library(${PROJECT_NAME} INTERFACE)
+add_library(${NAMESPACE_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 set_target_properties(
-  libutils
+  ${PROJECT_NAME}
   PROPERTIES VERSION ${PROJECT_VERSION}
              SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
-target_include_directories(
-  libutils 
+target_sources(${PROJECT_NAME}
   INTERFACE 
-  $<BUILD_INTERFACE:${INCLUDE_UTILS}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    $<BUILD_INTERFACE:${INCLUDE_UTILS}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+
+target_include_directories(
+  ${PROJECT_NAME} 
+  INTERFACE 
+    $<BUILD_INTERFACE:${INCLUDE_UTILS}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 #########################
 # Install configuration #
 #########################
-include(CMakePackageConfigHelpers)
+ 
+set(ConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+install(
+  TARGETS ${PROJECT_NAME}
+  EXPORT ${PROJECT_NAME}Targets
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Library 
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Library 
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Library
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} COMPONENT Development 
+  INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(
+  EXPORT ${PROJECT_NAME}Targets
+  FILE ${PROJECT_NAME}Targets.cmake
+  NAMESPACE ${NAMESPACE_NAME}::
+  DESTINATION ${ConfigPackageLocation}
+  COMPONENT Development
+)
+
+configure_package_config_file(
+  ${PROJECT_NAME}Config.cmake.in
+  ${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION "${ConfigPackageLocation}"
+  PATH_VARS CMAKE_INSTALL_PREFIX
+)
+
 write_basic_package_version_file(
-    "libutilsConfigVersion.cmake"
+    ${PROJECT_NAME}ConfigVersion.cmake
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
-include(GNUInstallDirs)
 install(
-    TARGETS libutils
-    EXPORT libutilsTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-configure_package_config_file(
-    "${CMAKE_CURRENT_LIST_DIR}/cmake/libutilsConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/libutilsConfig.cmake"
-    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/cmake/libutils
-)
-
-install(
-    EXPORT libutilsTargets
-    FILE libutilsTargets.cmake
-    NAMESPACE libutils::
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/cmake/libutils
-)
-
-install(
-    DIRECTORY ${UTILS_DIR} 
-    DESTINATION include
+  FILES 
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+  DESTINATION
+    ${ConfigPackageLocation}
+  COMPONENT
+    Development
 )
 
 ######################
