@@ -95,8 +95,6 @@ install(
     Development
 )
 
-install(DIRECTORY ${UTILS_DIR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
-
 ######################
 # Settings for tests # 
 ######################
