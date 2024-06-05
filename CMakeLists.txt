@@ -36,7 +36,7 @@ set_target_properties(
 )
 
 target_sources(${PROJECT_NAME}
-  INTERFACE 
+  PUBLIC 
     $<BUILD_INTERFACE:${INCLUDE_UTILS}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
@@ -76,6 +76,7 @@ configure_package_config_file(
   ${PROJECT_NAME}Config.cmake.in
   ${PROJECT_NAME}Config.cmake
   INSTALL_DESTINATION ${ConfigPackageLocation}
+  PATH_VARS CMAKE_INSTALL_LIBDIR
 )
 
 write_basic_package_version_file(
