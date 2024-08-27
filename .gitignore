@@ -1,5 +1,4 @@
 build/
-docs/_build/doctrees/
-docs/_build/html/_sources/
-docs/_build/html/_static/
-docs/_build/xml/
+cmake-build-release/
+docs/build/
+.idea/
