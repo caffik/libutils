@@ -23,55 +23,10 @@ set(INCLUDE_UTILS
 add_library(libutils INTERFACE)
 add_library(libutils::utils ALIAS libutils)
 
-set_target_properties(
-  libutils
-  PROPERTIES VERSION ${PROJECT_VERSION}
-             SOVERSION ${PROJECT_VERSION_MAJOR}
-)
-
 target_include_directories(
   libutils 
   INTERFACE 
   $<BUILD_INTERFACE:${INCLUDE_UTILS}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
-
-#########################
-# Install configuration #
-#########################
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(
-    "libutilsConfigVersion.cmake"
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY SameMajorVersion
-)
-
-include(GNUInstallDirs)
-install(
-    TARGETS libutils
-    EXPORT libutilsTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-configure_package_config_file(
-    "${CMAKE_CURRENT_LIST_DIR}/cmake/libutilsConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/libutilsConfig.cmake"
-    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/cmake/libutils
-)
-
-install(
-    EXPORT libutilsTargets
-    FILE libutilsTargets.cmake
-    NAMESPACE libutils::
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/cmake/libutils
-)
-
-install(
-    DIRECTORY ${UTILS_DIR} 
-    DESTINATION include
 )
 
 ######################
