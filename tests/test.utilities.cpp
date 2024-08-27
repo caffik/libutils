@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "utilities.hpp"
+#include <libutils/utilities.hpp>
 
 TEST(Utilities, copy) {
   std::vector vec1{1, 2};

@@ -9,7 +9,7 @@ option(ENABLE_TESTING "Build tests." ON)
 ###############
 
 cmake_minimum_required(VERSION 3.20)
-project(libutils
+project(include
     VERSION 1.0.0
     DESCRIPTION "Utils library."
     LANGUAGES CXX 
@@ -18,7 +18,7 @@ project(libutils
 set(CMAKE_CXX_STANDARD 17)
 
 set(INCLUDE_DIR
-    ${PROJECT_SOURCE_DIR}/libutils
+        ${PROJECT_SOURCE_DIR}/include
 )
 
 ######################
