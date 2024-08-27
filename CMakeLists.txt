@@ -2,7 +2,8 @@
 #   OPTIONS   #
 ###############
 
-option(ENABLE_TESTING "Build tests." ON)
+option(ENABLE_TESTING "Build tests." OFF)
+option(ENABLE_DOCS "Build all docs." ON)
 
 ###############
 #   PROJECT   #
@@ -38,6 +39,10 @@ target_include_directories(
 #   SUBDIRECTORIES   #
 ######################
 
-if(ENABLE_TESTING)
+if (ENABLE_TESTING)
     add_subdirectory(tests)
+endif()
+
+if (ENABLE_DOCS)
+    add_subdirectory(docs)
 endif()
