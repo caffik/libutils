@@ -1,4 +1,6 @@
-Algorithms
+.. _ext_iterator:
+
+Extension of <iterator>
 ========================
 
 Short description... 
@@ -6,9 +8,6 @@ Short description...
 Description of functions
 ########################
 
-.. doxygengroup:: other_algorithms
+.. doxygengroup:: ext_iterator
    :project: libutils
    :content-only:
-
-Examples
-########

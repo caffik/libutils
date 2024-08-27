@@ -1,4 +1,6 @@
-Extension of <algorithm>
+.. _other_algorithm:
+
+Algorithms
 ========================
 
 Short description... 
@@ -6,9 +8,6 @@ Short description...
 Description of functions
 ########################
 
-.. doxygengroup:: ext_algorithm
+.. doxygengroup:: other_algorithms
    :project: libutils
    :content-only:
-
-Examples
-########

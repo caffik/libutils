@@ -5,7 +5,7 @@
 
 namespace utils
 {
-  /** @defgroup details 
+  /** @defgroup details Details
    * @{
    * 
    */ 
@@ -26,7 +26,7 @@ namespace utils
   }
   /** @} */ // end details group 
   
-  /** @defgroup ext_algorithm 
+  /** @defgroup ext_algorithm Extended algorithms
    * @{
    */ 
 
@@ -121,7 +121,7 @@ namespace utils
   }
   /** @} */ // end group ext_algorithm
 
-  /** @defgroup ext_iterator 
+  /** @defgroup ext_iterator Extended iterators
    * @{
    * 
    */
@@ -151,7 +151,7 @@ namespace utils
 
   /** @} */ // end group ext_iterator
 
-  /** @defgroup other_algorithms 
+  /** @defgroup other_algorithms Other algorithms
    * @{
    * 
    */
