@@ -21,7 +21,8 @@
       "inherits": "config-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "ENABLE_TESTING": "ON"
+        "ENABLE_TESTING": "ON",
+        "ENABLE_DOCS": "ON"
       }
     },
     {
@@ -31,7 +32,8 @@
       "inherits": "debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "ENABLE_TESTING": "OFF"
+        "ENABLE_TESTING": "OFF",
+        "ENABLE_DOCS": "OFF"
       }
     }
   ],
