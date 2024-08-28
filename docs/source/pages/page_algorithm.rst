@@ -49,6 +49,22 @@ Output:
 
     destination: 1 2 3 1 2 3 1 2 3
 
+- ``max_element_conditional``
+
+.. literalinclude:: ../../../tests/test.algorithm.cpp
+    :language: cpp
+    :start-after: max_element_conditional_start
+    :end-before: max_element_conditional_end
+    :dedent: 2
+    :append:
+        std::cout << "result: " << result << std::endl;
+
+Output:
+
+.. code-block:: none
+
+    result: 7
+
 - ``mismatch_from_end``
 
 .. literalinclude:: ../../../tests/test.algorithm.cpp
