@@ -13,6 +13,9 @@ namespace utils {
  * @param path Path to the directory to be read.
  * @param first Output iterator to which the directory contents will be copied.
  * @return Output iterator pointing to the end of the copied range.
+ *
+ * @throws std::filesystem::filesystem_error if the directory cannot be read. For some compilers, this exception may not
+ * be thrown.
  */
 template <typename OutputIt>
 OutputIt read_directory(const std::string &path, OutputIt first) {
@@ -31,6 +34,9 @@ OutputIt read_directory(const std::string &path, OutputIt first) {
  * @param first Output iterator to which the directory contents will be copied.
  * @param p Unary predicate that returns true for the elements to be copied.
  * @return Output iterator pointing to the end of the copied range.
+ *
+ * @throws std::filesystem::filesystem_error if the directory cannot be read. For some compilers, this exception may not
+ * be thrown.
  */
 template <typename OutputIt, typename UnaryPred>
 OutputIt read_directory_if(const std::string &path, OutputIt first,
@@ -47,6 +53,9 @@ OutputIt read_directory_if(const std::string &path, OutputIt first,
  * Defaults to std::vector<std::filesystem::path>.
  * @param directory Path to the directory to be read.
  * @return A container with the paths of the directory contents.
+ *
+ * @throws std::filesystem::filesystem_error if the directory cannot be read. For some compilers, this exception may not
+ * be thrown.
  */
 template <typename Container = std::vector<std::filesystem::path>>
 Container read_directory(const std::string &directory) {
@@ -65,6 +74,9 @@ Container read_directory(const std::string &directory) {
  * @param p Unary predicate that returns true for the elements to be copied.
  * @return A container with the paths of the directory contents that satisfy the
  * predicate.
+ *
+ * @throws std::filesystem::filesystem_error if the directory cannot be read. For some compilers, this exception may not
+ * be thrown.
  */
 template <typename Container = std::vector<std::filesystem::path>,
           typename UnaryPred>
