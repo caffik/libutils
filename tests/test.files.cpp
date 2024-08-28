@@ -68,8 +68,17 @@ TEST(ReadDirectoryIf, NoPathsSatisfyPredicate) {
 TEST(ReadDirectoryIf, EmptyDirectory) {
   std::vector<std::filesystem::path> result;
   auto predicate = [](const std::filesystem::path &p) { return true; };
+#ifdef __GNUC__
+  #ifndef __clang__
+  EXPECT_THROW(utils::read_directory_if(kDirEmptyPath, std::back_inserter(result), predicate),
+               std::filesystem::filesystem_error);
+  #endif
+  #ifdef __clang__
   utils::read_directory_if(kDirEmptyPath, std::back_inserter(result), predicate);
   EXPECT_TRUE(result.empty());
+  #endif
+#endif
+
 }
 
 TEST(ReadDirectoryIf, InvalidDirectoryPath) {
@@ -136,8 +145,16 @@ TEST(ReadDirectoryIfContainer, NoPathsSatisfyPredicate) {
 
 TEST(ReadDirectoryIfContainer, EmptyDirectory) {
   auto predicate = [](const std::filesystem::path &p) { return true; };
+#ifdef __GNUC__
+  #ifndef __clang__
+  EXPECT_THROW(utils::read_directory_if(kDirEmptyPath, predicate),
+               std::filesystem::filesystem_error);
+  #endif
+  #ifdef __clang__
   const auto result{utils::read_directory_if(kDirEmptyPath, predicate)};
   EXPECT_TRUE(result.empty());
+  #endif
+#endif
 }
 
 TEST(ReadDirectoryIfContainer, InvalidDirectoryPath) {
