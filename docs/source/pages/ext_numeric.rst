@@ -1,6 +1,6 @@
-.. _ext_iterator:
+.. _ext_numeric:
 
-Extension of <iterator>
+Extension of <numeric>
 ========================
 
 Short description... 
@@ -8,6 +8,6 @@ Short description...
 Description of functions
 ########################
 
-.. doxygengroup:: ext_iterator
+.. doxygengroup:: ext_numeric
    :project: libutils
    :content-only:

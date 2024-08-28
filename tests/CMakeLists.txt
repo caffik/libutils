@@ -29,7 +29,8 @@ endif()
 #################
 
 add_executable(Tests
-        test.utilities.cpp
+        test.algorithm.cpp
+        test.iterator.cpp
 )
 
 target_link_libraries(Tests

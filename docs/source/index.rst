@@ -13,6 +13,6 @@ Installation:
    :maxdepth: 2
    :caption: Contents:
 
-   pages/ext_algorithm
-   pages/ext_iterator
-   pages/other_algorithm
+   pages/page_algorithm
+   pages/page_iterator
+   pages/ext_numeric

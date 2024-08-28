@@ -2,7 +2,7 @@
 #   OPTIONS   #
 ###############
 
-option(ENABLE_TESTING "Build tests." OFF)
+option(ENABLE_TESTING "Build tests." ON)
 option(ENABLE_DOCS "Build all docs." ON)
 
 ###############
