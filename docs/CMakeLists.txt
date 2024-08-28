@@ -5,7 +5,7 @@ find_package(
 )
 
 find_package(
-  Doxygen 
+  Doxygen 1.11.0
     REQUIRED
 )
 

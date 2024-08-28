@@ -1,5 +1,13 @@
 include(FetchContent)
 
+#######################
+#   Configure files   #
+#######################
+
+set(TEST_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/test_files")
+configure_file(priv/paths.test.files.hpp.in
+        ${CMAKE_CURRENT_SOURCE_DIR}/paths.test.files.hpp)
+
 ###################
 #   Google Test   #
 ###################
@@ -30,6 +38,7 @@ endif()
 
 add_executable(Tests
         test.algorithm.cpp
+        test.files.cpp
         test.iterator.cpp
         test.numeric.cpp
         test.type_traits.cpp

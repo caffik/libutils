@@ -1,0 +1,7 @@
+#ifndef PATHS_HPP
+#define PATHS_HPP
+
+const char* const kDirPath{"${TEST_FILES_DIR}/dir"};
+const char* const kDirEmptyPath{"${TEST_FILES_DIR}/dir_empty"};
+
+#endif
