@@ -4,6 +4,42 @@
 #include <libutils/algorithm.hpp>
 
 /**
+ * Argmax tests.
+ */
+
+TEST(Argmax, FindsIndexOfMaxElement) {
+    //! [argmax_start]
+    const std::vector v{1, 3, 5, 7, 9};
+    const auto result{utils::argmax(v.begin(), v.end())};
+    //! [argmax_end]
+    EXPECT_EQ(result, 4);
+}
+
+TEST(Argmax, SingleElement) {
+    const std::vector v{42};
+    const auto result{utils::argmax(v.begin(), v.end())};
+    EXPECT_EQ(result, 0);
+}
+
+TEST(Argmax, EmptyRange) {
+    const std::vector<int> v{};
+    const auto result{utils::argmax(v.begin(), v.end())};
+    EXPECT_EQ(result, 0);
+}
+
+TEST(Argmax, AllElementsEqual) {
+    const std::vector v{5, 5, 5, 5, 5};
+    const auto result{utils::argmax(v.begin(), v.end())};
+    EXPECT_EQ(result, 0);
+}
+
+TEST(Argmax, NegativeNumbers) {
+    const std::vector v{-1, -3, -5, -7, -9};
+    const auto result{utils::argmax(v.begin(), v.end())};
+    EXPECT_EQ(result, 0);
+}
+
+/**
  * CopyRangeNTimes tests.
  */
 

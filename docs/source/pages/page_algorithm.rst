@@ -14,6 +14,22 @@ Usage
 
 The following examples demonstrates how to use the **algorithm** header file:
 
+- ``argmax``
+
+.. literalinclude:: ../../../tests/test.algorithm.cpp
+    :language: cpp
+    :start-after: argmax_start
+    :end-before: argmax_end
+    :dedent: 2
+    :append:
+        std::cout << "result: " << result << std::endl;
+
+Output:
+
+.. code-block:: none
+
+    result: 4
+
 - ``copy_range_n_times``
 
 .. literalinclude:: ../../../tests/test.algorithm.cpp
