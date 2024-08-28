@@ -31,6 +31,7 @@ endif()
 add_executable(Tests
         test.algorithm.cpp
         test.iterator.cpp
+        test.numeric.cpp
         test.type_traits.cpp
 )
 

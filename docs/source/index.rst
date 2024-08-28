@@ -16,5 +16,5 @@ Installation:
 
    pages/page_algorithm
    pages/page_iterator
-   pages/ext_numeric
+   pages/page_numeric
    pages/page_type_traits
