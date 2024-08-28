@@ -30,6 +30,24 @@ Output:
 
     result: 4
 
+- ``argmax_conditional``
+
+.. literalinclude:: ../../../tests/test.algorithm.cpp
+    :language: cpp
+    :start-after: argmax_conditional_start
+    :end-before: argmax_conditional_end
+    :dedent: 2
+    :append:
+        std::cout << std::boolalpha
+                  << "result.first: " << result.first
+                  << ", result.second: " << result.second std::endl;
+
+Output:
+
+.. code-block:: none
+
+    result.first: true, result.second: 3
+
 - ``copy_range_n_times``
 
 .. literalinclude:: ../../../tests/test.algorithm.cpp

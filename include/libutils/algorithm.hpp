@@ -17,6 +17,32 @@ namespace utils {
     return std::distance(first, std::max_element(first, last));
   }
 
+  template<typename InputIt1, typename InputIt2, typename UnaryPred>
+  InputIt1 max_element_conditional(InputIt1, InputIt1, InputIt2, UnaryPred p);
+
+  /**
+   * Finds the index of the maximum element in a range that satisfies a given
+   * predicate.
+   *
+   * @tparam InputIt1 Type of the first input iterator.
+   * @tparam InputIt2 Type of the second input iterator.
+   * @tparam UnaryPred Type of the unary predicate.
+   * @param first1 Iterator to the beginning of the first range.
+   * @param last1 Iterator to the end of the first range.
+   * @param first2 Iterator to the beginning of the second range.
+   * @param p Unary predicate that returns true for the elements to be considered.
+   * @return A pair where the first element is a boolean indicating if a valid
+   * maximum element was found, and the second element is the index of the maximum
+   * element in the first range that satisfies the predicate.
+   */
+  template<typename InputIt1, typename InputIt2, typename UnaryPred>
+  std::pair<bool, std::size_t> argmax_conditional(InputIt1 first1, InputIt1 last1,
+                                                  InputIt2 first2, UnaryPred p) {
+    const auto max_cond{max_element_conditional(first1, last1, first2, p)};
+    const auto arg_max_cond{std::distance(first1, max_cond)};
+    return std::make_pair(max_cond != last1, arg_max_cond);
+  }
+
   /**
    * @brief Copies a range of elements multiple times to a destination.
    *

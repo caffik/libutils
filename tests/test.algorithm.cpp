@@ -40,6 +40,62 @@ TEST(Argmax, NegativeNumbers) {
 }
 
 /**
+ * ArgmaxConditional tests.
+ */
+
+TEST(ArgmaxConditional, FindsIndexOfMaxElementWithPredicate) {
+    //! [argmax_conditional_start]
+    const std::vector v1{1, 3, 5, 7, 9};
+    const std::vector v2{0, 1, 0, 1, 0};
+    const auto result{
+        utils::argmax_conditional(
+            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
+    };
+    //! [argmax_conditional_end]
+    EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(3)));
+}
+
+TEST(ArgmaxConditional, NoElementSatisfiesPredicate) {
+    const std::vector v1{1, 3, 5, 7, 9};
+    const std::vector v2{0, 0, 0, 0, 0};
+    const auto result{
+        utils::argmax_conditional(
+            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
+    };
+    EXPECT_EQ(result, std::make_pair(false, static_cast<std::size_t>(5)));
+}
+
+TEST(ArgmaxConditional, EmptyRange) {
+    const std::vector<int> v1{};
+    const std::vector<int> v2{};
+    const auto result{
+        utils::argmax_conditional(
+            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
+    };
+    EXPECT_EQ(result, std::make_pair(false, static_cast<std::size_t>(0)));
+}
+
+TEST(ArgmaxConditional, SingleElementSatisfiesPredicate) {
+    const std::vector v1{1};
+    const std::vector v2{1};
+    const auto result{
+        utils::argmax_conditional(
+            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
+    };
+    EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(0)));
+}
+
+TEST(ArgmaxConditional, MultipleElementsSatisfyPredicate) {
+    const std::vector v1{1, 3, 5, 7, 9};
+    const std::vector v2{1, 1, 1, 1, 1};
+    const auto result{
+        utils::argmax_conditional(
+            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
+    };
+    EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(4)));
+}
+
+/**
  * CopyRangeNTimes tests.
  */
 
