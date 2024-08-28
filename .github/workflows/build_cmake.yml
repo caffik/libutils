@@ -1,0 +1,15 @@
+name: Build and Test
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '.gitignore'
+
+jobs:
+  linux:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/linux.yml
+
+
