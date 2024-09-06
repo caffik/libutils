@@ -1,0 +1,4 @@
+#### Requrements ####
+breathe == 4.35.0
+sphinx == 8.0.2
+furo == 2024.8.6
