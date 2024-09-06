@@ -1,0 +1,51 @@
+name: GitHub Pages
+
+on:
+  push:
+    tags:
+     - 'v*'
+    paths-ignore:
+      - '.gitignore'
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on:
+      - ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Exit if not on main branch
+        if: endsWith(github.event.base_ref, 'main') == false
+        run: exit -1
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+
+      - name: Install Ninja
+        run: sudo apt-get install ninja-build
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get install flex bison
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz
+          tar -xf doxygen-1.12.0.linux.bin.tar.gz 
+          cd doxygen-1.12.0
+          sudo make
+          sudo make install
+
+      - name: Install Python dependencies
+        run: pip install -r docs/requirements.txt
+
+      - name: Configure CMake and build
+        run: |
+          cmake -S . --preset=release -DENABLE_DOCS=ON
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/html/
+          force_orphan: true
