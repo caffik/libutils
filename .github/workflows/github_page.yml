@@ -16,9 +16,6 @@ jobs:
       - ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Exit if not on main branch
-        if: endsWith(github.event.base_ref, 'main') == false
-        run: exit -1
 
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
