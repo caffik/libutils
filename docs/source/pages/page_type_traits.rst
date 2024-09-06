@@ -24,6 +24,12 @@ provides a set of templates that can be used to query properties of types.
     :project: libutils
     :content-only:
 
+* **invoke_or_return**
+
+.. doxygengroup:: invoke_or_return
+    :project: libutils
+    :content-only:
+
 Usage
 -----
 
@@ -79,3 +85,13 @@ Output:
 
     std::is_same_v<utils::remove_cvref_t<const int&>, int>: true
     std::is_same_v<utils::remove_cvref_t<volatile int&>, int>: true
+
+- ``invoke_or_return``
+
+.. code-block:: cpp
+
+    int some_function(SomeLargeObject& a, Funcs&&... funcs) {
+      // If no funcs are provided, return the reference to the object itself
+      // Otherwise, create a copy of object and apply the functions on it and return the result
+        further_processing(a, utils::invoke_or_return(std::forward<Funcs>(funcs), a));
+    }
