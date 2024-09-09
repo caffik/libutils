@@ -127,5 +127,41 @@ namespace utils {
     };
     return std::pair(pair.first.base(), pair.second.base());
   }
+
+  /**
+   * @brief Reorders elements in a range based on given indices.
+   *
+   * This function reorders the elements in the range [first1, last1) according to the
+   * indices provided in the range starting at indices_first2. The indices specify the
+   * new positions of the elements.
+   *
+   * @note It is assumed that the indices are valid and within the range [0, std::distance(first1, last1)).
+   * @remark Range [indices_first2, std::next(indices_first2, std::distance(first1, last1))) is modified.
+   *
+   * @tparam RandomIt1 Type of the random access iterator for the elements.
+   * @tparam RandomIt2 Type of the random access iterator for the indices.
+   * @param first1 Iterator to the beginning of the elements range.
+   * @param last1 Iterator to the end of the elements range.
+   * @param indices_first Iterator to the beginning of the indices range.
+   */
+  template<typename RandomIt1, typename RandomIt2>
+  void reorder_elements_by_indices(RandomIt1 first1, RandomIt1 last1, RandomIt2 indices_first) {
+    using integer_type = typename std::iterator_traits<RandomIt2>::value_type;
+    auto distance{std::distance(first1, last1)};
+
+    for (integer_type i{0}; i < distance; ++i) {
+      integer_type current{i};
+      auto current_it{std::next(indices_first, current)};
+
+      while (i != *current_it) {
+        auto next{*current_it};
+        std::swap(*std::next(first1, current), *std::next(first1, next));
+        *current_it = current;
+        current = next;
+        current_it = std::next(indices_first, current);
+      }
+      *current_it = current;
+    }
+  }
 } // namespace utils
 #endif // ALGORITHM_HPP
