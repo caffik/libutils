@@ -20,7 +20,7 @@ But it is recommended to include the library with CMake. For that purposes `Fetc
     FetchContent_Declare(
         libutils
         GIT_REPOSITORY  https://github.com/caffik/libutils.git
-        GIT_TAG         v1.1.0
+        GIT_TAG         v1.1.2
     )
     FetchContent_MakeAvailable(libutils)
     include(libutils)
