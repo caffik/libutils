@@ -31,7 +31,7 @@ Output:
     *it1: 2
     *it2: 2
 
-- ``distanceDifference``
+- ``distance_difference``
 
 .. literalinclude:: ../../../tests/test.iterator.cpp
     :language: cpp
@@ -47,7 +47,7 @@ Output:
 
     result: -1
 
-- ``getLongerRange``
+- ``get_longer_range``
 
 .. literalinclude:: ../../../tests/test.iterator.cpp
     :language: cpp
@@ -64,3 +64,20 @@ Output:
 
     partial_sum: 1 3 6 10 15 21
 
+- ``MulitIterator``
+
+.. literalinclude:: ../../../tests/test.iterator.cpp
+    :language: cpp
+    :start-after: multi_iterator_sort_start
+    :end-before: multi_iterator_sort_end
+    :dedent: 2
+    :append:
+        for (auto it{begin}; it != end; ++it) {
+            std::cout << *it << " ";
+        }
+
+Output:
+
+.. code-block:: none
+
+    [1, a] [1, d] [2, b] [2, c]

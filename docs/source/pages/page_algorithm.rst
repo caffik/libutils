@@ -20,7 +20,7 @@ The following examples demonstrates how to use the **algorithm** header file:
     :language: cpp
     :start-after: argmax_start
     :end-before: argmax_end
-    :dedent: 2
+    :dedent: 4
     :append:
         std::cout << "result: " << result << std::endl;
 
@@ -36,7 +36,7 @@ Output:
     :language: cpp
     :start-after: argmax_conditional_start
     :end-before: argmax_conditional_end
-    :dedent: 2
+    :dedent: 4
     :append:
         std::cout << std::boolalpha
                   << "result.first: " << result.first
@@ -54,7 +54,7 @@ Output:
     :language: cpp
     :start-after: copy_range_n_times_start
     :end-before: copy_range_n_times_end
-    :dedent: 2
+    :dedent: 4
     :append:
         std::cout << desination: ";
         for (const auto& elem : result) {
@@ -73,7 +73,7 @@ Output:
     :language: cpp
     :start-after: max_element_conditional_start
     :end-before: max_element_conditional_end
-    :dedent: 2
+    :dedent: 4
     :append:
         std::cout << "result: " << result << std::endl;
 
@@ -89,7 +89,7 @@ Output:
     :language: cpp
     :start-after: mismatch_from_end_start
     :end-before: mismatch_from_end_end
-    :dedent: 2
+    :dedent: 4
     :append:
         std::cout << "*mis_first: " << *mis_first
                   << ", *mis_second: " << *mis_second << std::endl;
@@ -99,3 +99,22 @@ Output:
 .. code-block:: none
 
     *mis_first: 3, *mis_second: 3
+
+- ``reorder_elements_by_indices``
+
+.. literalinclude:: ../../../tests/test.algorithm.cpp
+    :language: cpp
+    :start-after: reorder_elements_by_indices_start
+    :end-before: reorder_elements_by_indices_end
+    :dedent: 4
+    :append:
+        std::cout << "elements: ";
+        for (const auto& e : elements) {
+            std::cout << e << " ";
+        }
+
+Output:
+
+.. code-block:: none
+
+    elements: 40 30 20 10

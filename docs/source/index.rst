@@ -55,3 +55,5 @@ Contents:
    pages/page_iterator
    pages/page_numeric
    pages/page_type_traits
+   pages/page_tuple
+   pages/page_utility

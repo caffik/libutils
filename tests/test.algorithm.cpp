@@ -47,10 +47,7 @@ TEST(ArgmaxConditional, FindsIndexOfMaxElementWithPredicate) {
     //! [argmax_conditional_start]
     const std::vector v1{1, 3, 5, 7, 9};
     const std::vector v2{0, 1, 0, 1, 0};
-    const auto result{
-        utils::argmax_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+    const auto result{utils::argmax_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     //! [argmax_conditional_end]
     EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(3)));
 }
@@ -58,40 +55,28 @@ TEST(ArgmaxConditional, FindsIndexOfMaxElementWithPredicate) {
 TEST(ArgmaxConditional, NoElementSatisfiesPredicate) {
     const std::vector v1{1, 3, 5, 7, 9};
     const std::vector v2{0, 0, 0, 0, 0};
-    const auto result{
-        utils::argmax_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+    const auto result{utils::argmax_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, std::make_pair(false, static_cast<std::size_t>(5)));
 }
 
 TEST(ArgmaxConditional, EmptyRange) {
     const std::vector<int> v1{};
     const std::vector<int> v2{};
-    const auto result{
-        utils::argmax_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+    const auto result{utils::argmax_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, std::make_pair(false, static_cast<std::size_t>(0)));
 }
 
 TEST(ArgmaxConditional, SingleElementSatisfiesPredicate) {
     const std::vector v1{1};
     const std::vector v2{1};
-    const auto result{
-        utils::argmax_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+    const auto result{utils::argmax_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(0)));
 }
 
 TEST(ArgmaxConditional, MultipleElementsSatisfyPredicate) {
     const std::vector v1{1, 3, 5, 7, 9};
     const std::vector v2{1, 1, 1, 1, 1};
-    const auto result{
-        utils::argmax_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+    const auto result{utils::argmax_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, std::make_pair(true, static_cast<std::size_t>(4)));
 }
 
@@ -103,10 +88,7 @@ TEST(CopyRangeNTimes, CopiesRangeMultipleTimes) {
     //! [copy_range_n_times_start]
     const std::vector source{1, 2, 3};
     std::vector<int> destination(9);
-    const auto result{
-        utils::copy_range_n_times(source.begin(), source.end(),
-                                  destination.begin(), 3)
-    };
+    const auto result{utils::copy_range_n_times(source.begin(), source.end(), destination.begin(), 3)};
     //! [copy_range_n_times_end]
     const std::vector expected{1, 2, 3, 1, 2, 3, 1, 2, 3};
     EXPECT_EQ(destination, expected);
@@ -116,10 +98,7 @@ TEST(CopyRangeNTimes, CopiesRangeMultipleTimes) {
 TEST(CopyRangeNTimes, CopiesRangeOnce) {
     const std::vector source{1, 2, 3};
     std::vector<int> destination(3);
-    const auto result{
-        utils::copy_range_n_times(source.begin(), source.end(),
-                                  destination.begin(), 1)
-    };
+    const auto result{utils::copy_range_n_times(source.begin(), source.end(), destination.begin(), 1)};
     const std::vector expected{1, 2, 3};
     EXPECT_EQ(destination, expected);
     EXPECT_EQ(result, destination.end());
@@ -128,10 +107,7 @@ TEST(CopyRangeNTimes, CopiesRangeOnce) {
 TEST(CopyRangeNTimes, HandlesEmptySourceRange) {
     const std::vector<int> source{};
     std::vector<int> destination(0);
-    const auto result{
-        utils::copy_range_n_times(source.begin(), source.end(),
-                                  destination.begin(), 3)
-    };
+    const auto result{utils::copy_range_n_times(source.begin(), source.end(), destination.begin(), 3)};
     const std::vector<int> expected{};
     EXPECT_EQ(destination, expected);
     EXPECT_EQ(result, destination.end());
@@ -146,9 +122,7 @@ TEST(MaxElementConditional, FindsMaxElementWithPredicate) {
     const std::vector v1{1, 3, 5, 7, 9};
     const std::vector v2{0, 1, 0, 1, 0};
     const auto result{
-        utils::max_element_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+            utils::max_element_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     //! [max_element_conditional_end]
     EXPECT_EQ(*result, 7);
 }
@@ -157,9 +131,7 @@ TEST(MaxElementConditional, NoElementSatisfiesPredicate) {
     const std::vector v1{1, 3, 5, 7, 9};
     const std::vector v2{0, 0, 0, 0, 0};
     const auto result{
-        utils::max_element_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+            utils::max_element_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, v1.end());
 }
 
@@ -167,9 +139,7 @@ TEST(MaxElementConditional, EmptyRange) {
     const std::vector<int> v1{};
     const std::vector<int> v2{};
     const auto result{
-        utils::max_element_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+            utils::max_element_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(result, v1.end());
 }
 
@@ -177,9 +147,7 @@ TEST(MaxElementConditional, SingleElementSatisfiesPredicate) {
     const std::vector v1{1};
     const std::vector v2{1};
     const auto result{
-        utils::max_element_conditional(
-            v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })
-    };
+            utils::max_element_conditional(v1.begin(), v1.end(), v2.begin(), [](const int x) { return x == 1; })};
     EXPECT_EQ(*result, 1);
 }
 
@@ -190,8 +158,7 @@ TEST(MaxElementConditional, SingleElementSatisfiesPredicate) {
 TEST(MismatchFromEnd, IdenticalRanges) {
     const std::vector vec1{1, 2, 3, 4, 5};
     const std::vector vec2{1, 2, 3, 4, 5};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     EXPECT_EQ(mis_first, vec1.begin());
     EXPECT_EQ(mis_second, vec2.begin());
 }
@@ -199,8 +166,7 @@ TEST(MismatchFromEnd, IdenticalRanges) {
 TEST(MismatchFromEnd, DifferentRanges) {
     const std::vector vec1{1, 2, 3, 4, 5};
     const std::vector vec2{1, 2, 3, 4, 6};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     EXPECT_EQ(mis_first, vec1.end());
     EXPECT_EQ(mis_second, vec2.end());
 }
@@ -209,8 +175,7 @@ TEST(MismatchFromEnd, FirstRangeShorter) {
     //! [mismatch_from_end_start]
     const std::vector vec1{3, 4, 5};
     const std::vector vec2{1, 2, 3, 4, 5};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     //! [mismatch_from_end_end]
     EXPECT_EQ(mis_first, vec1.begin());
     EXPECT_EQ(mis_second, vec2.begin() + 2);
@@ -219,8 +184,7 @@ TEST(MismatchFromEnd, FirstRangeShorter) {
 TEST(MismatchFromEnd, SecondRangeShorter) {
     const std::vector vec1{1, 2, 3, 4, 5};
     const std::vector vec2{3, 4, 5};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     EXPECT_EQ(mis_first, vec1.begin() + 2);
     EXPECT_EQ(mis_second, vec2.begin());
 }
@@ -228,8 +192,7 @@ TEST(MismatchFromEnd, SecondRangeShorter) {
 TEST(MismatchFromEnd, EmptyFirstRange) {
     const std::vector<int> vec1{};
     const std::vector vec2{1, 2, 3, 4, 5};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     EXPECT_EQ(mis_first, vec1.end());
     EXPECT_EQ(mis_second, vec2.end());
 }
@@ -237,8 +200,41 @@ TEST(MismatchFromEnd, EmptyFirstRange) {
 TEST(MismatchFromEnd, BothRangesEmpty) {
     std::vector<int> vec1{};
     std::vector<int> vec2{};
-    const auto &[mis_first, mis_second] =
-            utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
+    const auto &[mis_first, mis_second] = utils::mismatch_from_end(vec1.begin(), vec1.end(), vec2.end());
     EXPECT_EQ(mis_first, vec1.end());
     EXPECT_EQ(mis_second, vec2.end());
+}
+
+/*
+ * ReorderElementsByIndices tests.
+ */
+
+TEST(ReorderElementsByIndices, ReordersCorrectly) {
+    //! [reorder_elements_by_indices_start]
+    std::vector elements{10, 20, 30, 40};
+    std::vector indices{3, 2, 1, 0};
+    utils::reorder_elements_by_indices(elements.begin(), elements.end(), indices.begin());
+    //! [reorder_elements_by_indices_end]
+    EXPECT_EQ(elements, (std::vector{40, 30, 20, 10}));
+}
+
+TEST(ReorderElementsByIndices, NoReorderingNeeded) {
+    std::vector elements{10, 20, 30, 40};
+    std::vector indices{0, 1, 2, 3};
+    utils::reorder_elements_by_indices(elements.begin(), elements.end(), indices.begin());
+    EXPECT_EQ(elements, (std::vector{10, 20, 30, 40}));
+}
+
+TEST(ReorderElementsByIndices, SingleElement) {
+    std::vector elements = {10};
+    std::vector indices = {0};
+    utils::reorder_elements_by_indices(elements.begin(), elements.end(), indices.begin());
+    EXPECT_EQ(elements, (std::vector{10}));
+}
+
+TEST(ReorderElementsByIndices, EmptyRange) {
+    std::vector<int> elements = {};
+    std::vector<int> indices = {};
+    utils::reorder_elements_by_indices(elements.begin(), elements.end(), indices.begin());
+    EXPECT_EQ(elements, (std::vector<int>{}));
 }
