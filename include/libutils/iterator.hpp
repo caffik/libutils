@@ -45,7 +45,7 @@ void advance(InputIts &...iterators) {
  */
 template <typename InputIt1, typename InputIt2>
 long long distance_difference(InputIt1 first1, InputIt1 last1, InputIt2 first2,
-                             InputIt2 last2) {
+                              InputIt2 last2) {
   return static_cast<long long>(std::abs(std::distance(first1, last1))) -
          static_cast<long long>(std::abs(std::distance(first2, last2)));
 }
@@ -69,7 +69,7 @@ long long distance_difference(InputIt1 first1, InputIt1 last1, InputIt2 first2,
  */
 template <typename InputIt1, typename InputIt2>
 auto get_longer_range(InputIt1 first1, InputIt1 last1, InputIt2 first2,
-                    InputIt2 last2) {
+                      InputIt2 last2) {
   if (distance_difference(first1, last1, first2, last2) >= 0) {
     return std::make_pair(first1, last1);
   }
@@ -138,7 +138,8 @@ public:
   /**
    * @brief Creates a MultiIterator from multiple iterators.
    *
-   * @tparam InputIters Variadic template parameter for the types of the iterators.
+   * @tparam InputIters Variadic template parameter for the types of the
+   * iterators.
    * @param iterators The iterators to be used for the MultiIterator.
    * @return A MultiIterator object.
    */
@@ -250,7 +251,9 @@ public:
     static_assert(
         !std::is_base_of_v<iterator_category, std::forward_iterator_tag>,
         "The iterator category must be at least bidirectional iterator.");
-    return operator+=(-d);
+    std::apply([d](auto &&...args) { ((std::advance(args, -d)), ...); },
+               iterators_);
+    return *this;
   }
 
   /**
@@ -310,7 +313,8 @@ public:
    * @brief Less-than comparison operator.
    *
    * @param rhs The right-hand side MultiIterator.
-   * @return True if this MultiIterator is less than the right-hand side, false otherwise.
+   * @return True if this MultiIterator is less than the right-hand side, false
+   * otherwise.
    */
   bool operator<(const MultiIterator &rhs) const {
     static_assert(
@@ -323,7 +327,8 @@ public:
    * @brief Greater-than comparison operator.
    *
    * @param rhs The right-hand side MultiIterator.
-   * @return True if this MultiIterator is greater than the right-hand side, false otherwise.
+   * @return True if this MultiIterator is greater than the right-hand side,
+   * false otherwise.
    */
   bool operator>(const MultiIterator &rhs) const {
     static_assert(
@@ -336,7 +341,8 @@ public:
    * @brief Less-than-or-equal-to comparison operator.
    *
    * @param rhs The right-hand side MultiIterator.
-   * @return True if this MultiIterator is less than or equal to the right-hand side, false otherwise.
+   * @return True if this MultiIterator is less than or equal to the right-hand
+   * side, false otherwise.
    */
   bool operator<=(const MultiIterator &rhs) const {
     static_assert(
@@ -349,7 +355,8 @@ public:
    * @brief Greater-than-or-equal-to comparison operator.
    *
    * @param rhs The right-hand side MultiIterator.
-   * @return True if this MultiIterator is greater than or equal to the right-hand side, false otherwise.
+   * @return True if this MultiIterator is greater than or equal to the
+   * right-hand side, false otherwise.
    */
   bool operator>=(const MultiIterator &rhs) const {
     static_assert(
