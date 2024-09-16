@@ -41,7 +41,9 @@ add_executable(Tests
         test.files.cpp
         test.iterator.cpp
         test.numeric.cpp
+        test.tuple.cpp
         test.type_traits.cpp
+        test.utility.cpp
 )
 
 target_link_libraries(Tests
