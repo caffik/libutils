@@ -21,7 +21,7 @@ include(FetchContent)
 FetchContent_Declare(
     libutils
     GIT_REPOSITORY  https://github.com/caffik/libutils.git
-    GIT_TAG         v1.1.0
+    GIT_TAG         v1.1.2
 )
 FetchContent_MakeAvailable(libutils)
 include(libutils)
