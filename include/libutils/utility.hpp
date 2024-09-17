@@ -1,6 +1,8 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include <functional>
+
 namespace utils {
 /**
  * @brief Returns a reference to the value or dereferenced pointer.
