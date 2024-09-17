@@ -223,7 +223,7 @@ public:
    * @param d The distance to advance the iterators.
    * @return A reference to the advanced MultiIterator.
    */
-  MultiIterator operator+=(difference_type d) {
+  MultiIterator &operator+=(difference_type d) {
     std::apply([d](auto &&...args) { ((std::advance(args, d)), ...); },
                iterators_);
     return *this;
