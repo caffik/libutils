@@ -3,9 +3,8 @@
 libutils
 ========
 
-libutils is a C++ header-only library that extends in some parts the C++ Standard Library.
-It requires C++17 or later. The library is organized in a set of header files, each one containing a set of related
-functions. The library is designed to be used in a modular way, so you can include only the headers you need.
+`libutils` is a C++ utility library that provides a set of useful functions and templates to simplify common programming
+tasks. The library is designed to be lightweight and not difficult to integrate into various projects.
 
 Installation:
 #############
