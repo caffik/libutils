@@ -60,7 +60,7 @@ tasks. The library is designed to be lightweight and not difficult to integrate 
 To add `libutils` to your project, you can use CMake's `add_subdirectory` function. First, clone the repository:
 
 ```sh
-git clone
+git clone https://github.com/caffik/libutils.git
 ```
 
 Then, add the following lines to your `CMakeLists.txt`:
