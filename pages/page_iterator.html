@@ -1,0 +1,860 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Numeric" href="page_numeric.html" /><link rel="prev" title="Files" href="page_files.html" />
+
+    <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
+        <title>Iterator - libutils</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-background-hover--transparent: #202020;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-background-hover--transparent: #202020;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">libutils</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">libutils</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="page_algorithm.html">Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="page_files.html">Files</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Iterator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="page_numeric.html">Numeric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="page_type_traits.html">Type_traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="page_tuple.html">Tuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="page_utility.html">Utility</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/pages/page_iterator.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="iterator">
+<span id="page-iterator"></span><h1>Iterator<a class="headerlink" href="#iterator" title="Link to this heading">¶</a></h1>
+<p>The <strong>iterator</strong> header file contains template functions for working with iterators.</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv45utils">
+<span id="_CPPv35utils"></span><span id="_CPPv25utils"></span><span id="utils"></span><span class="target" id="namespaceutils"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">utils</span></span></span><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_NSt6size_tEDpEN5utils7advanceEvDpR8InputIts">
+<span id="_CPPv3I_NSt6size_tEDpEN5utils7advanceEDpR8InputIts"></span><span id="_CPPv2I_NSt6size_tEDpEN5utils7advanceEDpR8InputIts"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InputIts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="iterator_8hpp_1aa7e7bf113b9a2530dcce8472796b3112"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">advance</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_NSt6size_tEDpEN5utils7advanceEvDpR8InputIts" title="utils::advance::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">iterators</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_NSt6size_tEDpEN5utils7advanceEvDpR8InputIts" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Advances multiple iterators by a specified number of steps. </p>
+<p>This function advances each of the provided iterators by N steps. The default value for N is 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> – The number of steps to advance the iterators. Default is 1. </p></li>
+<li><p><strong>InputIts</strong> – Variadic template parameter for the types of the iterators.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>iterators</strong> – The iterators to be advanced. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2">
+<span id="_CPPv3I00EN5utils19distance_differenceE8InputIt18InputIt18InputIt28InputIt2"></span><span id="_CPPv2I00EN5utils19distance_differenceE8InputIt18InputIt18InputIt28InputIt2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputIt1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputIt2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="iterator_8hpp_1a2531cc44538341cf2b625bba7e79732c"></span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distance_difference</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2" title="utils::distance_difference::InputIt1"><span class="n"><span class="pre">InputIt1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first1</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2" title="utils::distance_difference::InputIt1"><span class="n"><span class="pre">InputIt1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last1</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2" title="utils::distance_difference::InputIt2"><span class="n"><span class="pre">InputIt2</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first2</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2" title="utils::distance_difference::InputIt2"><span class="n"><span class="pre">InputIt2</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Computes the difference in distances between two ranges. </p>
+<p>This function calculates the absolute difference between the distances of two given ranges. The first range is defined by a pair of iterators of the same types, and the second range is defined by a pair of iterators of possibly different types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>InputIt1</strong> – Input iterator type for the first range. </p></li>
+<li><p><strong>InputIt2</strong> – Input an iterator type for the second range.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>first1</strong> – Iterator to the beginning of the first range. </p></li>
+<li><p><strong>last1</strong> – Iterator to the end of the first range. </p></li>
+<li><p><strong>first2</strong> – Iterator to the beginning of the second range. </p></li>
+<li><p><strong>last2</strong> – Iterator to the end of the second range.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The difference between the modulus of distances of the two ranges. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2">
+<span id="_CPPv3I00EN5utils16get_longer_rangeE8InputIt18InputIt18InputIt28InputIt2"></span><span id="_CPPv2I00EN5utils16get_longer_rangeE8InputIt18InputIt18InputIt28InputIt2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputIt1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">InputIt2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="iterator_8hpp_1a9fd23ba13ccf0647f8517aae82f02356"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_longer_range</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2" title="utils::get_longer_range::InputIt1"><span class="n"><span class="pre">InputIt1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first1</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2" title="utils::get_longer_range::InputIt1"><span class="n"><span class="pre">InputIt1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last1</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2" title="utils::get_longer_range::InputIt2"><span class="n"><span class="pre">InputIt2</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">first2</span></span>, <a class="reference internal" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2" title="utils::get_longer_range::InputIt2"><span class="n"><span class="pre">InputIt2</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">last2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Returns the range with the longer distance between two given ranges. </p>
+<p>This function compares the distances of two ranges and returns the range with the longer distance. If the distances are equal, it returns the first range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>InputIt1</strong> – Input iterator type for the first range. </p></li>
+<li><p><strong>InputIt2</strong> – Input an iterator type for the second range.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>first1</strong> – Iterator to the beginning of the first range. </p></li>
+<li><p><strong>last1</strong> – Iterator to the end of the first range. </p></li>
+<li><p><strong>first2</strong> – Iterator to the beginning of the second range. </p></li>
+<li><p><strong>last2</strong> – Iterator to the end of the second range.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pair of iterators representing the range with the longer distance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN5utils13MultiIteratorE">
+<span id="_CPPv3IDpEN5utils13MultiIteratorE"></span><span id="_CPPv2IDpEN5utils13MultiIteratorE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InputIts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classutils_1_1MultiIterator"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MultiIterator</span></span></span><a class="headerlink" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="Link to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;iterator.hpp&gt;</em></div>
+<p>A class template for iterating over multiple iterators simultaneously. </p>
+<p>This class template allows for the simultaneous iteration over multiple iterators of potentially different types. It provides various operators to advance, compare, and access the elements pointed to by the iterators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>InputIts</strong> – Variadic template parameter for the types of the iterators. </p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator17iterator_categoryE">
+<span id="_CPPv3N5utils13MultiIterator17iterator_categoryE"></span><span id="_CPPv2N5utils13MultiIterator17iterator_categoryE"></span><span class="target" id="classutils_1_1MultiIterator_1afd0e9900cdbb7a776a6ed4d58ad649f6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iterator_category</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">common_type_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator_traits</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator_category</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator17iterator_categoryE" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The iterator category type. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator10value_typeE">
+<span id="_CPPv3N5utils13MultiIterator10value_typeE"></span><span id="_CPPv2N5utils13MultiIterator10value_typeE"></span><span class="target" id="classutils_1_1MultiIterator_1a16b4a268f951a1ea30047ffe7044a6b6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator_traits</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value_type</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator10value_typeE" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The value type of the elements pointed to by the iterators. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator15difference_typeE">
+<span id="_CPPv3N5utils13MultiIterator15difference_typeE"></span><span id="_CPPv2N5utils13MultiIterator15difference_typeE"></span><span class="target" id="classutils_1_1MultiIterator_1a8ff18de9666735ea7171a93ccbeca84b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">difference_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">common_type_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator_traits</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">difference_type</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator15difference_typeE" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The difference type for the iterators. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator7pointerE">
+<span id="_CPPv3N5utils13MultiIterator7pointerE"></span><span id="_CPPv2N5utils13MultiIterator7pointerE"></span><span class="target" id="classutils_1_1MultiIterator_1afbf140703803d7d32b112ef2b4f30b7d"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pointer</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">iterator_traits</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pointer</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator7pointerE" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The pointer type to the elements pointed to by the iterators. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator9referenceE">
+<span id="_CPPv3N5utils13MultiIterator9referenceE"></span><span id="_CPPv2N5utils13MultiIterator9referenceE"></span><span class="target" id="classutils_1_1MultiIterator_1a848905bb61821f56201fc4aab6a6868f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="page_tuple.html#_CPPv4IDpEN5utils13pointer_tupleE" title="utils::pointer_tuple"><span class="n"><span class="pre">pointer_tuple</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">remove_reference_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">decltype</span></span><span class="p"><span class="pre">(</span></span><span class="o"><span class="pre">*</span></span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">declval</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator9referenceE" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The reference type to the elements pointed to by the iterators. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator13MultiIteratorEv">
+<span id="_CPPv3N5utils13MultiIterator13MultiIteratorEv"></span><span id="_CPPv2N5utils13MultiIterator13MultiIteratorEv"></span><span id="utils::MultiIterator::MultiIterator"></span><span class="target" id="classutils_1_1MultiIterator_1a69b6d01afb96f0365f8a6a41f6e3f746"></span><span class="sig-name descname"><span class="n"><span class="pre">MultiIterator</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator13MultiIteratorEv" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator13MultiIteratorERK13MultiIterator">
+<span id="_CPPv3N5utils13MultiIterator13MultiIteratorERK13MultiIterator"></span><span id="_CPPv2N5utils13MultiIterator13MultiIteratorERK13MultiIterator"></span><span id="utils::MultiIterator::MultiIterator__MultiIteratorCR"></span><span class="target" id="classutils_1_1MultiIterator_1af36228074ea1143fb40d543165a9e957"></span><span class="sig-name descname"><span class="n"><span class="pre">MultiIterator</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERK13MultiIterator" title="utils::MultiIterator::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">multi_iterator</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator13MultiIteratorERR13MultiIterator">
+<span id="_CPPv3N5utils13MultiIterator13MultiIteratorERR13MultiIterator"></span><span id="_CPPv2N5utils13MultiIterator13MultiIteratorERR13MultiIterator"></span><span id="utils::MultiIterator::MultiIterator__MultiIteratorRR"></span><span class="target" id="classutils_1_1MultiIterator_1a09b15916693cd379fa3f7e8ada57569a"></span><span class="sig-name descname"><span class="n"><span class="pre">MultiIterator</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERR13MultiIterator" title="utils::MultiIterator::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">multi_iterator</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERR13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator13MultiIteratorEDpRR8InputIts">
+<span id="_CPPv3N5utils13MultiIterator13MultiIteratorEDpRR8InputIts"></span><span id="_CPPv2N5utils13MultiIterator13MultiIteratorEDpRR8InputIts"></span><span id="utils::MultiIterator::MultiIterator__InputItsRRDp"></span><span class="target" id="classutils_1_1MultiIterator_1af8a8b4805f84743f6792e9ba3651d7d8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MultiIterator</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">iterators</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator13MultiIteratorEDpRR8InputIts" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Constructs a <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> from multiple iterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iterators</strong> – The iterators to be used for the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratoraSERK13MultiIterator">
+<span id="_CPPv3N5utils13MultiIteratoraSERK13MultiIterator"></span><span id="_CPPv2N5utils13MultiIteratoraSERK13MultiIterator"></span><span id="utils::MultiIterator::assign-operator__MultiIteratorCR"></span><span class="target" id="classutils_1_1MultiIterator_1a9566cc9d88933edd90333cd5786bb850"></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">multi_iterator</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratoraSERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratoraSERR13MultiIterator">
+<span id="_CPPv3N5utils13MultiIteratoraSERR13MultiIterator"></span><span id="_CPPv2N5utils13MultiIteratoraSERR13MultiIterator"></span><span id="utils::MultiIterator::assign-operator__MultiIteratorRR"></span><span class="target" id="classutils_1_1MultiIterator_1aa633c780407365f9c57a2dcff5ae2089"></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">multi_iterator</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratoraSERR13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratorD0Ev">
+<span id="_CPPv3N5utils13MultiIteratorD0Ev"></span><span id="_CPPv2N5utils13MultiIteratorD0Ev"></span><span id="utils::MultiIterator::~MultiIterator"></span><span class="target" id="classutils_1_1MultiIterator_1a06dd323d890f52998c03ab5361074807"></span><span class="sig-name descname"><span class="n"><span class="pre">~MultiIterator</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratorD0Ev" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN5utils13MultiIterator19make_multi_iteratorE13MultiIteratorIDp10InputItersEDpRR10InputIters">
+<span id="_CPPv3IDpEN5utils13MultiIterator19make_multi_iteratorEDpRR10InputIters"></span><span id="_CPPv2IDpEN5utils13MultiIterator19make_multi_iteratorEDpRR10InputIters"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">InputIters</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classutils_1_1MultiIterator_1a9a51d97001eb39517dc81ce09e15e395"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIterator19make_multi_iteratorE13MultiIteratorIDp10InputItersEDpRR10InputIters" title="utils::MultiIterator::make_multi_iterator::InputIters"><span class="n"><span class="pre">InputIters</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">make_multi_iterator</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIterator19make_multi_iteratorE13MultiIteratorIDp10InputItersEDpRR10InputIters" title="utils::MultiIterator::make_multi_iterator::InputIters"><span class="n"><span class="pre">InputIters</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">iterators</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN5utils13MultiIterator19make_multi_iteratorE13MultiIteratorIDp10InputItersEDpRR10InputIters" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Creates a <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> from multiple iterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>InputIters</strong> – Variadic template parameter for the types of the iterators. </p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>iterators</strong> – The iterators to be used for the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratormlEv">
+<span id="_CPPv3NK5utils13MultiIteratormlEv"></span><span id="_CPPv2NK5utils13MultiIteratormlEv"></span><span id="utils::MultiIterator::mul-operatorC"></span><span class="target" id="classutils_1_1MultiIterator_1a0dfb9e31b850725ce71c2a0ec295e237"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator9referenceE" title="utils::MultiIterator::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratormlEv" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Dereferences the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> to access the elements. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A reference to the elements pointed to by the iterators. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorptEv">
+<span id="_CPPv3NK5utils13MultiIteratorptEv"></span><span id="_CPPv2NK5utils13MultiIteratorptEv"></span><span id="utils::MultiIterator::pointer-operatorC"></span><span class="target" id="classutils_1_1MultiIterator_1a57c698559858e7aa64e7ca59dd9f4106"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator7pointerE" title="utils::MultiIterator::pointer"><span class="n"><span class="pre">pointer</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-&gt;</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorptEv" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Accesses the elements pointed to by the iterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pointer to the elements pointed to by the iterators. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratorppEv">
+<span id="_CPPv3N5utils13MultiIteratorppEv"></span><span id="_CPPv2N5utils13MultiIteratorppEv"></span><span id="utils::MultiIterator::inc-operator"></span><span class="target" id="classutils_1_1MultiIterator_1a287e0d2a2b6f65282ebcc486a9495471"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">++</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratorppEv" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Pre-increment operator to advance the iterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A reference to the advanced <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratorppEi">
+<span id="_CPPv3N5utils13MultiIteratorppEi"></span><span id="_CPPv2N5utils13MultiIteratorppEi"></span><span id="utils::MultiIterator::inc-operator__i"></span><span class="target" id="classutils_1_1MultiIterator_1a4d4cd3ce06b0018d416c9b8a0f45445f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">++</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratorppEi" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Post-increment operator to advance the iterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> before advancing. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratormmEv">
+<span id="_CPPv3N5utils13MultiIteratormmEv"></span><span id="_CPPv2N5utils13MultiIteratormmEv"></span><span id="utils::MultiIterator::dec-operator"></span><span class="target" id="classutils_1_1MultiIterator_1a2814e9ee9fcfb8d85c797ae782e02367"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">--</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratormmEv" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Pre-decrement operator to move the iterators backward. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A reference to the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> after moving backward. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratormmEi">
+<span id="_CPPv3N5utils13MultiIteratormmEi"></span><span id="_CPPv2N5utils13MultiIteratormmEi"></span><span id="utils::MultiIterator::dec-operator__i"></span><span class="target" id="classutils_1_1MultiIterator_1a8552aab7a8c6aba249f8cc59e7f5d00f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">--</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratormmEi" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Post-decrement operator to move the iterators backward. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> before moving backward. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratorpLE15difference_type">
+<span id="_CPPv3N5utils13MultiIteratorpLE15difference_type"></span><span id="_CPPv2N5utils13MultiIteratorpLE15difference_type"></span><span id="utils::MultiIterator::add-assign-operator__difference_type"></span><span class="target" id="classutils_1_1MultiIterator_1a69c518c2e4f82ff99f0148e2a281dfce"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator15difference_typeE" title="utils::MultiIterator::difference_type"><span class="n"><span class="pre">difference_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratorpLE15difference_type" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Advances the iterators by a specified distance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – The distance to advance the iterators. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the advanced <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorplE15difference_type">
+<span id="_CPPv3NK5utils13MultiIteratorplE15difference_type"></span><span id="_CPPv2NK5utils13MultiIteratorplE15difference_type"></span><span id="utils::MultiIterator::add-operator__difference_typeC"></span><span class="target" id="classutils_1_1MultiIterator_1a52167fc2baab65693b0b59e0c9a53441"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator15difference_typeE" title="utils::MultiIterator::difference_type"><span class="n"><span class="pre">difference_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorplE15difference_type" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Returns a new <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> advanced by a specified distance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – The distance to advance the iterators. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> advanced by the specified distance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIteratormIE15difference_type">
+<span id="_CPPv3N5utils13MultiIteratormIE15difference_type"></span><span id="_CPPv2N5utils13MultiIteratormIE15difference_type"></span><span id="utils::MultiIterator::sub-assign-operator__difference_type"></span><span class="target" id="classutils_1_1MultiIterator_1adf84569c80fb4f8a12a3c8e1533bc1ff"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator15difference_typeE" title="utils::MultiIterator::difference_type"><span class="n"><span class="pre">difference_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5utils13MultiIteratormIE15difference_type" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Moves the iterators backward by a specified distance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – The distance to move the iterators backward. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> after moving backward. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratormiE15difference_type">
+<span id="_CPPv3NK5utils13MultiIteratormiE15difference_type"></span><span id="_CPPv2NK5utils13MultiIteratormiE15difference_type"></span><span id="utils::MultiIterator::sub-operator__difference_typeC"></span><span class="target" id="classutils_1_1MultiIterator_1afdea095d7126e644af94cabe71289c26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5utils13MultiIterator15difference_typeE" title="utils::MultiIterator::difference_type"><span class="n"><span class="pre">difference_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratormiE15difference_type" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Returns a new <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> moved backward by a specified distance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – The distance to move the iterators backward. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> moved backward by the specified distance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratormiERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratormiERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratormiERK13MultiIterator"></span><span id="utils::MultiIterator::sub-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1a6bd88ed2f18e219542cdf41ee269b435"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratormiERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Computes the difference between two MultiIterators. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The difference between the two MultiIterators. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratoreqERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratoreqERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratoreqERK13MultiIterator"></span><span id="utils::MultiIterator::eq-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1abc08291a3bf12c391a97f7366af342b7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratoreqERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Equality comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the iterators are equal, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorneERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratorneERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratorneERK13MultiIterator"></span><span id="utils::MultiIterator::neq-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1a9baa0dbf2e64b9b6a1abd71b031ca1c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorneERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Inequality comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if all the iterators are different, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorltERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratorltERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratorltERK13MultiIterator"></span><span id="utils::MultiIterator::lt-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1a1288fdf0b5c055b7756be90c1b0fb6ab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorltERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Less-than comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> is less than the right-hand side, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorgtERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratorgtERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratorgtERK13MultiIterator"></span><span id="utils::MultiIterator::gt-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1ac3151e1f77d66894fd396b86c574b978"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&gt;</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorgtERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Greater-than comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> is greater than the right-hand side, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorleERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratorleERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratorleERK13MultiIterator"></span><span id="utils::MultiIterator::lte-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1a94c5df101778dd57e34cf2427829ded7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorleERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Less-than-or-equal-to comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> is less than or equal to the right-hand side, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5utils13MultiIteratorgeERK13MultiIterator">
+<span id="_CPPv3NK5utils13MultiIteratorgeERK13MultiIterator"></span><span id="_CPPv2NK5utils13MultiIteratorgeERK13MultiIterator"></span><span id="utils::MultiIterator::gte-operator__MultiIteratorCRC"></span><span class="target" id="classutils_1_1MultiIterator_1ad7dd142487a45d40b4a8fa9dfbc7f94b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&gt;=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator"><span class="n"><span class="pre">MultiIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5utils13MultiIteratorgeERK13MultiIterator" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Greater-than-or-equal-to comparison operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhs</strong> – The right-hand side <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this <a class="reference internal" href="#classutils_1_1MultiIterator"><span class="std std-ref">MultiIterator</span></a> is greater than or equal to the right-hand side, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N5utils13MultiIterator10iterators_E">
+<span id="_CPPv3N5utils13MultiIterator10iterators_E"></span><span id="_CPPv2N5utils13MultiIterator10iterators_E"></span><span id="utils::MultiIterator::iterators___std::tuple:InputItsDp:"></span><span class="target" id="classutils_1_1MultiIterator_1a4fcb480e5ad2f2c656a23adc6389feb4"></span><a class="reference internal" href="page_tuple.html#_CPPv4St" title="std"><span class="n"><span class="pre">std</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE" title="utils::MultiIterator::InputIts"><span class="n"><span class="pre">InputIts</span></span></a><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iterators_</span></span></span><a class="headerlink" href="#_CPPv4N5utils13MultiIterator10iterators_E" title="Link to this definition">¶</a><br /></dt>
+<dd><p>The tuple of iterators. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>The following examples demonstrates how to use the <strong>iterator</strong> header file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">advance&lt;std::size_t</span> <span class="pre">N</span> <span class="pre">=</span> <span class="pre">1&gt;</span></code></p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec1</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="w"> </span><span class="n">list1</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">it1</span><span class="p">{</span><span class="n">vec1</span><span class="p">.</span><span class="n">begin</span><span class="p">()};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">it2</span><span class="p">{</span><span class="n">list1</span><span class="p">.</span><span class="n">begin</span><span class="p">()};</span>
+<span class="n">utils</span><span class="o">::</span><span class="n">advance</span><span class="p">(</span><span class="n">it1</span><span class="p">,</span><span class="w"> </span><span class="n">it2</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;*it1: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">it1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span>
+<span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;*it2: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">it2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*it1: 2
+*it2: 2
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">distance_difference</span></code></p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec1</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec2</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="p">{</span><span class="n">utils</span><span class="o">::</span><span class="n">distance_difference</span><span class="p">(</span><span class="n">vec1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+<span class="w">                                             </span><span class="n">vec2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec2</span><span class="p">.</span><span class="n">end</span><span class="p">())};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;result: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>result: -1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_longer_range</span></code></p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec1</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec2</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">get_longer_range</span><span class="p">(</span><span class="n">vec1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+<span class="w">                                                    </span><span class="n">vec2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;partial_sum: &quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">partial_sum</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>partial_sum: 1 3 6 10 15 21
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MulitIterator</span></code></p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="n">vec1</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec2</span><span class="p">{</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p">};</span>
+<span class="n">utils</span><span class="o">::</span><span class="n">MultiIterator</span><span class="w"> </span><span class="n">begin</span><span class="p">{</span><span class="n">vec1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec2</span><span class="p">.</span><span class="n">begin</span><span class="p">()};</span>
+<span class="n">utils</span><span class="o">::</span><span class="n">MultiIterator</span><span class="w"> </span><span class="n">end</span><span class="p">{</span><span class="n">vec1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">vec2</span><span class="p">.</span><span class="n">end</span><span class="p">()};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rhs</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="p">{</span><span class="n">begin</span><span class="p">};</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">end</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[1, a] [1, d] [2, b] [2, c]
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="page_numeric.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Numeric</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="page_files.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Files</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Paweł Maciocha
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Iterator</a><ul>
+<li><a class="reference internal" href="#_CPPv45utils"><code class="docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
+<li><a class="reference internal" href="#_CPPv4I_NSt6size_tEDpEN5utils7advanceEvDpR8InputIts"><code class="docutils literal notranslate"><span class="pre">utils::advance()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4I00EN5utils19distance_differenceEx8InputIt18InputIt18InputIt28InputIt2"><code class="docutils literal notranslate"><span class="pre">utils::distance_difference()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4I00EN5utils16get_longer_rangeEDa8InputIt18InputIt18InputIt28InputIt2"><code class="docutils literal notranslate"><span class="pre">utils::get_longer_range()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIteratorE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator</span></code></a><ul>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator17iterator_categoryE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::iterator_category</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator10value_typeE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::value_type</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator15difference_typeE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::difference_type</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator7pointerE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::pointer</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator9referenceE"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::reference</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorEv"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::MultiIterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::MultiIterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorERR13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::MultiIterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator13MultiIteratorEDpRR8InputIts"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::MultiIterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratoraSERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratoraSERR13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratorD0Ev"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::~MultiIterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4IDpEN5utils13MultiIterator19make_multi_iteratorE13MultiIteratorIDp10InputItersEDpRR10InputIters"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::make_multi_iterator()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratormlEv"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator*()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorptEv"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator-&gt;()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratorppEv"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator++()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratorppEi"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator++()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratormmEv"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator--()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratormmEi"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator--()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratorpLE15difference_type"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator+=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorplE15difference_type"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator+()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIteratormIE15difference_type"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator-=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratormiE15difference_type"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator-()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratormiERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator-()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratoreqERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator==()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorneERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator!=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorltERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator&lt;()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorgtERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator&gt;()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorleERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator&lt;=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4NK5utils13MultiIteratorgeERK13MultiIterator"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::operator&gt;=()</span></code></a></li>
+<li><a class="reference internal" href="#_CPPv4N5utils13MultiIterator10iterators_E"><code class="docutils literal notranslate"><span class="pre">utils::MultiIterator::iterators_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
